@@ -5,23 +5,17 @@ def _normalize(v):
     return v / (np.linalg.norm(v) + 1e-10)
 #clasifica
 
-def classify():
+def classify(mic_norm: np.ndarray, mic_acov: np.ndarray):
     PATH_FM       = "src/dataSet/fmVector.txt"
     PATH_WN       = "src/dataSet/wnVector.txt"
-    PATH_MIC      = "src/dataSet/micProcessed.txt"
     PATH_FM_ACOV  = "src/dataSet/fmAcov.txt"
     PATH_WN_ACOV  = "src/dataSet/wnAcov.txt"
-    PATH_MIC_ACOV = "src/dataSet/micAcov.txt"
 
     print("Cargando vectores de referencia...")
     fm_norm  = np.loadtxt(PATH_FM)
     wn_norm  = np.loadtxt(PATH_WN)
     fm_acov  = np.loadtxt(PATH_FM_ACOV)
     wn_acov  = np.loadtxt(PATH_WN_ACOV)
-
-    print("Cargando vector del microfono...")
-    mic_norm = np.loadtxt(PATH_MIC)
-    mic_acov = np.loadtxt(PATH_MIC_ACOV)
 
     size     = min(len(mic_norm), len(fm_norm), len(wn_norm))
     mic_norm = mic_norm[:size]

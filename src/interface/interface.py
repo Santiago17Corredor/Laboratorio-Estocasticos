@@ -92,6 +92,7 @@ class App:
             font=("Consolas", 12, "bold"), wraplength=180, justify="left"
         )
         self.lbl_resultado.pack(anchor="w", pady=(2, 0))
+
     def _construirGraficaEspera(self):
         self.fig, self.ax = plt.subplots(figsize=(9, 4))
         self._estiloAx(self.ax)
@@ -246,8 +247,8 @@ class App:
         self.root.update()
 
         try:
-            transformer.detener()
-            resultado, dist_fm, dist_wn, mic_n, fm_n, wn_n, mic_acov, fm_acov, wn_acov = classify()
+            avg = transformer.detener()
+            resultado, dist_fm, dist_wn, mic_n, fm_n, wn_n, mic_acov, fm_acov, wn_acov = classify(avg["norm"], avg["acov"])
 
             color = "#4fc3f7" if resultado == "FM" else "#aed581"
             self.lbl_grabacion.config(text="Detenido", fg="#555555")

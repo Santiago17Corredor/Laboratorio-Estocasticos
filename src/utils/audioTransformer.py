@@ -26,7 +26,7 @@ class AudioTransformer:
                 self._buffer = self._buffer[FRAMES_VENTANA:]
                 self._procesarVentana(ventana)
  
-    def detener(self) -> str:
+    def detener(self) -> dict:
         with self._lock:
             n = len(self._resultados)
  
@@ -39,7 +39,7 @@ class AudioTransformer:
         os.makedirs(os.path.dirname(PATH_MIC), exist_ok=True)
         np.savetxt(PATH_MIC,      avg["norm"])
         np.savetxt(PATH_MIC_ACOV, avg["acov"])
-        return PATH_MIC
+        return avg
  
     def promedioActual(self) -> dict:
         with self._lock:
